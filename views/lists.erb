@@ -1,0 +1,13 @@
+<ul id="lists">
+  <% @lists.each_with_index do |list, idx| %>
+    <li>
+      <a href="/lists/<%= idx %>">
+        <%= list[:name] %><p><%= list[:todos].size %></p>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<% content_for :header_links do %>
+  <a href="/lists/new">Create New List</a>
+<% end %>
