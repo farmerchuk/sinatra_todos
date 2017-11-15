@@ -42,14 +42,6 @@ helpers do
     incomplete_todos.each { |todo| yield(todo, todos.index(todo)) }
     completed_todos.each { |todo| yield(todo, todos.index(todo)) }
   end
-
-  def load_list(list_id)
-    list = session[:lists][list_id]
-    return list if list
-
-    session[:error] = "List not found."
-    redirect "/lists"
-  end
 end
 
 before do
@@ -70,6 +62,14 @@ def error_for_todo_name(todo_name, list_id)
   elsif !(1..100).cover?(todo_name.size)
     "Todo name must be between 1 and 100 characters long."
   end
+end
+
+def load_list(list_id)
+  list = session[:lists][list_id]
+  return list if list
+
+  session[:error] = "List not found."
+  redirect "/lists"
 end
 
 get "/" do
